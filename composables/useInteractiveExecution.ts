@@ -34,7 +34,7 @@ export const useInteractiveExecution = () => {
 
 		try {
 			socket.value = io({
-				path: '/api/socket.io',
+				path: '/api/websocket',
 				transports: ['websocket', 'polling'],
 				timeout: 10000,
 				forceNew: true,

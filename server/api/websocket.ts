@@ -21,6 +21,11 @@ const activeProcesses = new Map<string, any>()
 const tempFiles = new Map<string, string>()
 
 export default defineEventHandler(async (event) => {
+	// Verificar si es una solicitud de WebSocket
+	if (event.node.req.method === 'GET') {
+		return { status: 'WebSocket server ready', path: '/api/websocket' }
+	}
+
 	// Solo manejar conexiones WebSocket
 	if (!event.node.req.headers.upgrade) {
 		return { error: 'WebSocket connection required' }
