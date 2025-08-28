@@ -20,14 +20,13 @@ export const useInteractiveExecution = () => {
 		executionTime: 0,
 	})
 
-	// Detectar automáticamente si WebSockets están disponibles
-	const isVercel = process.env.VERCEL || window?.location?.hostname?.includes('vercel.app')
-	const supportsWebSockets = !isVercel
+	// Usar WebSockets siempre (solo Railway)
+	const supportsWebSockets = true
 
-	// Conectar al WebSocket (solo en desarrollo)
+	// Conectar al WebSocket
 	const connect = () => {
 		if (!supportsWebSockets) {
-			console.warn('WebSockets not supported in production. Using fallback API.')
+			console.warn('WebSockets not supported. Using fallback API.')
 			return
 		}
 
