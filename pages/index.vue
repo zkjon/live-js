@@ -74,19 +74,6 @@
       </div>
     </div>
     
-    <!-- Modales deshabilitados temporalmente -->
-    <!-- 
-    <SettingsModal 
-      v-if="showSettings"
-      @close="showSettings = false"
-    />
-    
-    <ShareModal 
-      v-if="showShareModal"
-      :share-url="shareUrl"
-      @close="showShareModal = false"
-    />
-    -->
   </div>
 </template>
 

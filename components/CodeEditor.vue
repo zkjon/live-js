@@ -75,7 +75,6 @@ onMounted(async () => {
 		cursorWidth: 1,
 		disableLayerHinting: true,
 		fontWeight: 'normal',
-		renderFinalNewline: false,
 	})
 
 	// Listen to editor changes
