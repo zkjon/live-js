@@ -62,7 +62,7 @@ export const useInteractiveExecution = () => {
 
 		// Manejar errores
 		socket.value.on('error', (data: { message: string }) => {
-			state.error += data.message + '\n'
+			state.error += `${data.message}\n`
 			state.isExecuting = false
 			state.isWaitingForInput = false
 		})
@@ -115,8 +115,9 @@ export const useInteractiveExecution = () => {
 
 			state.isExecuting = false
 			state.executionTime = response.executionTime || 0
-		} catch (error: any) {
-			state.error = error.message || 'Execution failed'
+		} catch (error: unknown) {
+			const err = error as Error
+			state.error = err.message || 'Execution failed'
 			state.isExecuting = false
 		}
 	}
@@ -157,7 +158,7 @@ export const useInteractiveExecution = () => {
 			})
 
 			// Agregar el input al output para mostrarlo
-			state.output += input + '\n'
+			state.output += `${input}\n`
 			state.isWaitingForInput = false
 			state.inputPrompt = ''
 		} else if (!supportsWebSockets) {

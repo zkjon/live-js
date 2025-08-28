@@ -43,10 +43,11 @@ export const useCodeExecution = () => {
 			executionTime.value = response.execution_time
 
 			return response
-		} catch (err: any) {
+		} catch (err: unknown) {
+			const error = err as Error & { data?: { message?: string } }
 			const errorMessage =
-				err.data?.message || err.message || 'Error desconocido al ejecutar el código'
-			error.value = errorMessage
+				error.data?.message || error.message || 'Error desconocido al ejecutar el código'
+			error.value = errorMessage as string
 
 			return {
 				success: false,
@@ -74,8 +75,9 @@ export const useCodeExecution = () => {
 			})
 
 			return response
-		} catch (err: any) {
-			throw new Error(err.data?.message || err.message || 'Error al guardar el código')
+		} catch (err: unknown) {
+			const error = err as Error & { data?: { message?: string } }
+			throw new Error(error.data?.message || error.message || 'Error al guardar el código')
 		}
 	}
 
@@ -84,8 +86,11 @@ export const useCodeExecution = () => {
 		try {
 			const response = await $fetch<CodeSnippet>(`/api/share/${shareToken}`)
 			return response
-		} catch (err: any) {
-			throw new Error(err.data?.message || err.message || 'Error al cargar el código compartido')
+		} catch (err: unknown) {
+			const error = err as Error & { data?: { message?: string } }
+			throw new Error(
+				error.data?.message || error.message || 'Error al cargar el código compartido'
+			)
 		}
 	}
 

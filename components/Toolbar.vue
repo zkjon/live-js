@@ -81,15 +81,6 @@
 </template>
 
 <script setup lang="ts">
-import {
-	BookmarkIcon,
-	CogIcon,
-	DocumentPlusIcon,
-	PlayIcon,
-	ShareIcon,
-	TrashIcon,
-} from '@heroicons/vue/24/outline'
-
 interface Props {
 	isExecuting?: boolean
 	theme?: string
@@ -105,12 +96,12 @@ interface Emits {
 	(e: 'theme-change', theme: string): void
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const _props = withDefaults(defineProps<Props>(), {
 	isExecuting: false,
 	theme: 'vs-dark',
 })
 
-const emit = defineEmits<Emits>()
+const _emit = defineEmits<Emits>()
 </script>
 
 <style scoped>

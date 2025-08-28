@@ -126,14 +126,12 @@
 </template>
 
 <script setup lang="ts">
-import { CheckIcon, ClipboardDocumentIcon, PencilIcon, PlusIcon } from '@heroicons/vue/24/outline'
-
 // Obtener ID de la ruta
 const route = useRoute()
 const id = route.params.id as string
 
 // Cargar datos del código
-const { data, pending, error } = await useFetch(`/api/load/${id}`)
+const { data, error } = await useFetch(`/api/load/${id}`)
 
 // Estado reactivo
 const copied = ref(false)
@@ -151,7 +149,7 @@ if (data.value) {
 }
 
 // Formatear fecha
-const formatDate = (dateString: string) => {
+const _formatDate = (dateString: string) => {
 	const date = new Date(dateString)
 	return date.toLocaleDateString('es-ES', {
 		year: 'numeric',
@@ -163,7 +161,7 @@ const formatDate = (dateString: string) => {
 }
 
 // Copiar código al portapapeles
-const copyCode = async () => {
+const _copyCode = async () => {
 	if (!data.value) return
 
 	try {
@@ -179,7 +177,7 @@ const copyCode = async () => {
 }
 
 // Abrir en el editor principal
-const openInEditor = () => {
+const _openInEditor = () => {
 	if (!data.value) return
 
 	// Guardar código en localStorage para que el editor principal lo cargue

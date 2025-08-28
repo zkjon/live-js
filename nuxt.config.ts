@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({

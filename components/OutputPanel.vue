@@ -39,8 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { TrashIcon } from '@heroicons/vue/24/outline'
-
 interface Props {
 	output?: string
 	error?: string
@@ -59,7 +57,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-const clearOutput = () => {
+const _clearOutput = () => {
 	emit('clear')
 }
 

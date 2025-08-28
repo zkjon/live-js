@@ -76,18 +76,7 @@
 
 <script setup lang="ts">
 // Importar el composable interactivo
-const {
-	isExecuting,
-	output,
-	error,
-	isWaitingForInput,
-	inputPrompt,
-	executionTime,
-	connect,
-	executeCode,
-	sendUserInput,
-	clearOutput,
-} = useInteractiveExecution()
+const { isExecuting, connect, executeCode, sendUserInput, clearOutput } = useInteractiveExecution()
 
 // Code and theme state
 const code = ref(`# Welcome to Live Python Coding!
@@ -113,7 +102,7 @@ print(f"The sum of {numbers} is: {total}")
 `)
 
 const isDark = ref(false)
-const codeEditor = ref()
+const _codeEditor = ref()
 
 // Connect to WebSocket on mount
 onMounted(() => {
@@ -126,21 +115,21 @@ const handleExecute = async () => {
 	executeCode(code.value, 30)
 }
 
-const handleClear = () => {
+const _handleClear = () => {
 	code.value = ''
 	clearOutput()
 }
 
-const handleUserInput = (input: string) => {
+const _handleUserInput = (input: string) => {
 	sendUserInput(input)
 }
 
-const handleCodeChange = (newCode: string) => {
+const _handleCodeChange = (_newCode: string) => {
 	// v-model already handles the update automatically
 	// This handler is available for additional logic if needed
 }
 
-const toggleTheme = () => {
+const _toggleTheme = () => {
 	isDark.value = !isDark.value
 	if (isDark.value) {
 		document.documentElement.classList.add('dark')

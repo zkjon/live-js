@@ -26,10 +26,10 @@ export default defineEventHandler(async (event) => {
 
 		try {
 			// Importar módulos necesarios
-			const { spawn } = await import('child_process')
-			const { writeFileSync, unlinkSync } = await import('fs')
-			const { join } = await import('path')
-			const { randomUUID } = await import('crypto')
+			const { spawn } = await import('node:child_process')
+			const { writeFileSync, unlinkSync } = await import('node:fs')
+			const { join } = await import('node:path')
+			const { randomUUID } = await import('node:crypto')
 
 			// Detectar si el código usa input() y manejarlo especialmente
 			let modifiedCode = code
@@ -100,13 +100,14 @@ export default defineEventHandler(async (event) => {
 				// Limpiar archivo temporal
 				try {
 					unlinkSync(tempFilePath)
-				} catch (cleanupError) {
+				} catch (_cleanupError) {
 					// Ignorar errores de limpieza
 				}
 			}
-		} catch (err: any) {
+		} catch (err: unknown) {
+			const error_obj = err as Error
 			success = false
-			error = `Error del sistema: ${err.message}`
+			error = `Error del sistema: ${error_obj.message}`
 		}
 
 		const executionTime = Date.now() - startTime
@@ -125,12 +126,13 @@ export default defineEventHandler(async (event) => {
 			error,
 			executionTime: executionTime,
 		}
-	} catch (error: any) {
-		console.error('Error en /api/execute:', error)
+	} catch (error: unknown) {
+		const err = error as Error & { statusCode?: number; statusMessage?: string }
+		console.error('Error en /api/execute:', err)
 
 		throw createError({
-			statusCode: error.statusCode || 500,
-			statusMessage: error.statusMessage || 'Error interno del servidor',
+			statusCode: err.statusCode || 500,
+			statusMessage: err.statusMessage || 'Error interno del servidor',
 		})
 	}
 })

@@ -107,11 +107,16 @@
 </template>
 
 <script setup lang="ts">
-import { XMarkIcon } from '@heroicons/vue/24/outline'
+interface Settings {
+	theme: string
+	fontSize: number
+	timeout: number
+	[key: string]: unknown
+}
 
 interface Emits {
 	(e: 'close'): void
-	(e: 'settings-changed', settings: any): void
+	(e: 'settings-changed', settings: Settings): void
 }
 
 const emit = defineEmits<Emits>()
@@ -140,7 +145,7 @@ onMounted(() => {
 	}
 })
 
-const saveSettings = () => {
+const _saveSettings = () => {
 	if (process.client) {
 		localStorage.setItem('python-editor-settings', JSON.stringify(settings.value))
 	}

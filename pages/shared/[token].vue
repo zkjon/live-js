@@ -63,8 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import { CheckIcon, ClipboardIcon } from '@heroicons/vue/24/outline'
-
 // Configuración de la página
 useHead({
 	title: 'Código Compartido - Live Python Coding',
@@ -79,16 +77,12 @@ const token = route.params.token as string
 const copied = ref(false)
 
 // Cargar código compartido
-const {
-	data: sharedCode,
-	pending,
-	error,
-} = await useFetch(`/api/share/${token}`, {
+const { data: sharedCode, error } = await useFetch(`/api/share/${token}`, {
 	server: false,
 })
 
 // Métodos
-const copyCode = async () => {
+const _copyCode = async () => {
 	if (!sharedCode.value?.code) return
 
 	try {
@@ -103,7 +97,7 @@ const copyCode = async () => {
 	}
 }
 
-const formatDate = (dateString: string | undefined) => {
+const _formatDate = (dateString: string | undefined) => {
 	if (!dateString) return ''
 
 	try {

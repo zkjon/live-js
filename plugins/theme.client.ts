@@ -5,7 +5,7 @@ export default defineNuxtPlugin(() => {
 			const savedTheme = localStorage.getItem('theme') || 'auto'
 
 			const getSystemTheme = () => {
-				if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
 					return 'dark'
 				}
 				return 'light'

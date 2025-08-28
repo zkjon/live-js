@@ -1,7 +1,7 @@
-import { spawn } from 'child_process'
-import { randomUUID } from 'crypto'
-import { unlinkSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { spawn } from 'node:child_process'
+import { randomUUID } from 'node:crypto'
+import { unlinkSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { Server } from 'socket.io'
 
 // Interfaz para los mensajes de WebSocket
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
 					const oldFile = tempFiles.get(socket.id)
 					try {
 						unlinkSync(oldFile)
-					} catch (e) {
+					} catch (_e) {
 						// Ignorar errores de limpieza
 					}
 					tempFiles.delete(socket.id)
@@ -176,8 +176,8 @@ ${code}
 		socket.on('user_input', (data: InputMessage) => {
 			if (activeProcesses.has(socket.id)) {
 				const process = activeProcesses.get(socket.id)
-				if (process && process.stdin && !process.killed) {
-					process.stdin.write(data.value + '\n')
+				if (process?.stdin && !process.killed) {
+					process.stdin.write(`${data.value}\n`)
 				}
 			}
 		})

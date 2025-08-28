@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 // Import Monaco Editor only on client
-let monaco: any = null
+let monaco: typeof import('monaco-editor') | null = null
 if (process.client) {
 	monaco = await import('monaco-editor')
 }
@@ -132,7 +132,7 @@ watch(
 defineExpose({
 	focus: () => editor?.focus(),
 	getSelection: () => editor?.getSelection(),
-	setSelection: (selection: any) => editor?.setSelection(selection),
+	setSelection: (selection: unknown) => editor?.setSelection(selection as any),
 	insertText: (text: string) => {
 		if (editor) {
 			const selection = editor.getSelection()

@@ -87,14 +87,6 @@
 </template>
 
 <script setup lang="ts">
-import {
-	CheckIcon,
-	ClipboardIcon,
-	EnvelopeIcon,
-	InformationCircleIcon,
-	XMarkIcon,
-} from '@heroicons/vue/24/outline'
-
 interface Props {
 	shareUrl: string
 }
@@ -102,12 +94,12 @@ interface Props {
 type Emits = (e: 'close') => void
 
 const props = defineProps<Props>()
-const emit = defineEmits<Emits>()
+const _emit = defineEmits<Emits>()
 
 const urlInput = ref<HTMLInputElement>()
 const copied = ref(false)
 
-const copyToClipboard = async () => {
+const _copyToClipboard = async () => {
 	try {
 		await navigator.clipboard.writeText(props.shareUrl)
 		copied.value = true
@@ -127,7 +119,7 @@ const copyToClipboard = async () => {
 	}
 }
 
-const shareViaEmail = () => {
+const _shareViaEmail = () => {
 	const subject = encodeURIComponent('Código Python compartido')
 	const body = encodeURIComponent(
 		`Hola,\n\nTe comparto este código Python:\n\n${props.shareUrl}\n\n¡Échale un vistazo!`
@@ -135,7 +127,7 @@ const shareViaEmail = () => {
 	window.open(`mailto:?subject=${subject}&body=${body}`)
 }
 
-const shareViaTwitter = () => {
+const _shareViaTwitter = () => {
 	const text = encodeURIComponent(`Echa un vistazo a este código Python que estoy trabajando:`)
 	const url = encodeURIComponent(props.shareUrl)
 	window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')

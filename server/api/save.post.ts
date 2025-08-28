@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto'
+import { randomUUID } from 'node:crypto'
 
 // Simulación de base de datos en memoria
 // En producción, usar una base de datos real como MongoDB, PostgreSQL, etc.

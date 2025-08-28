@@ -81,7 +81,7 @@ watch(
 )
 
 // Handle input submission
-const handleSubmitInput = () => {
+const _handleSubmitInput = () => {
 	if (userInput.value.trim()) {
 		emit('user-input', userInput.value.trim())
 		userInput.value = ''
@@ -89,7 +89,7 @@ const handleSubmitInput = () => {
 }
 
 // Handle input cancellation
-const handleCancelInput = () => {
+const _handleCancelInput = () => {
 	userInput.value = ''
 	// Could emit a cancellation event if needed
 }
