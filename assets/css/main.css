@@ -1,0 +1,294 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globales para Live Python Coding */
+
+/* Variables CSS personalizadas */
+:root {
+  --color-primary: #10b981; /* green-500 */
+  --color-primary-dark: #059669; /* green-600 */
+  --color-secondary: #6b7280; /* gray-500 */
+  --color-background: #f9fafb; /* gray-50 */
+  --color-surface: #ffffff;
+  --color-text: #111827; /* gray-900 */
+  --color-text-secondary: #6b7280; /* gray-500 */
+  --color-border: #e5e7eb; /* gray-200 */
+  --color-error: #ef4444; /* red-500 */
+  --color-warning: #f59e0b; /* amber-500 */
+  --color-success: #10b981; /* green-500 */
+}
+
+/* Tema oscuro */
+.dark {
+  --color-background: #111827; /* gray-900 */
+  --color-surface: #1f2937; /* gray-800 */
+  --color-text: #f9fafb; /* gray-50 */
+  --color-text-secondary: #9ca3af; /* gray-400 */
+  --color-border: #374151; /* gray-700 */
+}
+
+/* Estilos base */
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Estilos para el editor de código */
+.monaco-editor {
+  font-family: 'Fira Code', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+}
+
+/* Scrollbar personalizada */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Tema oscuro para scrollbar */
+.dark .custom-scrollbar {
+  scrollbar-color: #4b5563 #374151;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Estilos para botones */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.btn-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.btn-lg {
+  @apply px-6 py-3 text-lg;
+}
+
+/* Estilos para inputs */
+.input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200;
+}
+
+.dark .input {
+  @apply bg-gray-800 border-gray-600 text-white;
+}
+
+/* Estilos para el panel de salida */
+.output-panel {
+  @apply bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-auto;
+}
+
+.output-panel .output-line {
+  @apply block py-1;
+}
+
+.output-panel .output-error {
+  @apply text-red-400;
+}
+
+.output-panel .output-warning {
+  @apply text-yellow-400;
+}
+
+.output-panel .output-info {
+  @apply text-blue-400;
+}
+
+/* Estilos para modales */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.modal-content {
+  @apply bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-fade-in;
+}
+
+.dark .modal-content {
+  @apply bg-gray-800;
+}
+
+/* Estilos para tooltips */
+.tooltip {
+  @apply absolute z-10 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200;
+}
+
+.tooltip.show {
+  @apply opacity-100;
+}
+
+/* Estilos para el divisor redimensionable */
+.resizer {
+  @apply bg-gray-300 hover:bg-gray-400 cursor-col-resize transition-colors duration-200;
+  width: 4px;
+}
+
+.dark .resizer {
+  @apply bg-gray-600 hover:bg-gray-500;
+}
+
+/* Estilos para indicadores de estado */
+.status-indicator {
+  @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.status-running {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-success {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-error {
+  @apply bg-red-100 text-red-800;
+}
+
+.dark .status-running {
+  @apply bg-yellow-900 text-yellow-200;
+}
+
+.dark .status-success {
+  @apply bg-green-900 text-green-200;
+}
+
+.dark .status-error {
+  @apply bg-red-900 text-red-200;
+}
+
+/* Estilos para el código inline */
+.code-inline {
+  @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono;
+}
+
+.dark .code-inline {
+  @apply bg-gray-800 text-gray-200;
+}
+
+/* Utilidades personalizadas */
+.text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.glass {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .glass {
+  background-color: rgba(17, 24, 39, 0.8);
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .mobile-stack {
+    @apply flex-col;
+  }
+  
+  .mobile-full {
+    @apply w-full;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-after: always;
+  }
+}
