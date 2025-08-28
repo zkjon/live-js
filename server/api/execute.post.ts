@@ -41,8 +41,15 @@ export default defineEventHandler(async (event) => {
 				modifiedCode = `# Nota: input() fue reemplazado con valores de ejemplo\n# 1st number: 5, 2nd number: 3\n\n${modifiedCode}`
 			}
 
-			// Ejecutar Python directamente desde stdin (sin archivos temporales)
-			const pythonProcess = spawn('python', ['-c', modifiedCode], {
+			// Intentar ejecutar Python (verificar disponibilidad)
+			let pythonCommand = 'python'
+			
+			// En Vercel, intentar python3 como alternativa
+			if (process.env.VERCEL) {
+				pythonCommand = 'python3'
+			}
+			
+			const pythonProcess = spawn(pythonCommand, ['-c', modifiedCode], {
 				timeout: timeout * 1000,
 				stdio: ['pipe', 'pipe', 'pipe'],
 			})
@@ -73,10 +80,14 @@ export default defineEventHandler(async (event) => {
 					})
 
 					pythonProcess.on('error', (err) => {
+					if (err.code === 'ENOENT') {
+						error = 'Python no está disponible en este entorno. Intenta usar Railway para funcionalidad completa.'
+					} else {
 						error = `Error al ejecutar Python: ${err.message}`
-						success = false
-						reject(err)
-					})
+					}
+					success = false
+					reject(err)
+				})
 
 					// Timeout manual
 					setTimeout(() => {
