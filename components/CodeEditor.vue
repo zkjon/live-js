@@ -24,7 +24,7 @@ interface Emits {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	language: 'python',
+	language: 'javascript',
 	theme: 'vs-dark',
 	readonly: false,
 })

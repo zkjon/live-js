@@ -112,22 +112,22 @@ console.log("¡Hola mundo!");
 // Cálculos
 const numbers = [1, 2, 3, 4, 5];
 const total = numbers.reduce((sum, num) => sum + num, 0);
-console.log(\`La suma de [\${numbers.join(', ')}] es: \${total}\`);
+console.log('La suma de [' + numbers.join(', ') + '] es: ' + total);
 
 // Bucles
 console.log("\nConteo regresivo:");
 for (let i = 5; i > 0; i--) {
-    console.log(\`Número: \${i}\`);
+    console.log('Número: ' + i);
 }
 console.log("¡Listo!");
 
 // Funciones
 function saludar(nombre) {
-    return \`¡Hola \${nombre}!\`;
+    return '¡Hola ' + nombre + '!';
 }
 
 const resultado = saludar("Usuario");
-console.log(\`\n\${resultado}\`);
+console.log('\n' + resultado);
 `)
 
 const isDark = ref(false)
