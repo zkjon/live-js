@@ -84,10 +84,9 @@ export default defineEventHandler(async (event) => {
 						error = 'Timeout: El código tardó demasiado en ejecutarse'
 						success = false
 						resolve(-1)
-					}, timeout * 1000)
-				})
-			}
-		} catch (err: unknown) {
+			}, timeout * 1000)
+		})
+	} catch (err: unknown) {
 			const error_obj = err as Error
 			success = false
 			error = `Error del sistema: ${error_obj.message}`
