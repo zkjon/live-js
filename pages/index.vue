@@ -102,32 +102,22 @@ const {
 } = useInteractiveExecution()
 
 // Code and theme state
-const code = ref(`// ¡Bienvenido a Live JavaScript Coding!
-// Escribe tu código JavaScript aquí y presiona "Run"
-// Editor de JavaScript simple y rápido
+const code = ref(`// Countdown program
+// Enter a number to start countdown
 
-// Ejemplo básico
-console.log("¡Hola mundo!");
+const number = 5;
 
-// Cálculos
-const numbers = [1, 2, 3, 4, 5];
-const total = numbers.reduce((sum, num) => sum + num, 0);
-console.log('La suma de [' + numbers.join(', ') + '] es: ' + total);
-
-// Bucles
-console.log('Conteo regresivo:');
-for (let i = 5; i > 0; i--) {
-    console.log('Número: ' + i);
+// Validate input is positive
+if (number < 0) {
+    console.log('Please enter a positive number');
+} else {
+    // Countdown loop
+    console.log('Starting countdown...');
+    for (let i = number; i >= 0; i--) {
+        console.log(i);
+    }
+    console.log('Countdown complete!');
 }
-console.log('¡Listo!');
-
-// Funciones
-function saludar(nombre) {
-    return '¡Hola ' + nombre + '!';
-}
-
-const resultado = saludar('Usuario');
-console.log(resultado);
 `)
 
 const isDark = ref(false)
