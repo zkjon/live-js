@@ -1,8 +1,10 @@
-# Live Python - Real-Time Python Code Editor
+<div align="middle">
+<img src="public/og-image.png" alt="Live Python" />
+</div>
+
+## 🌟 Live Python
 
 A modern web application for writing, executing, and sharing Python code in real-time with a minimalist and elegant interface.
-
-## 🚀 Features
 
 ### Code Editor
 - **Monaco Editor** with complete Python syntax highlighting
