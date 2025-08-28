@@ -37,7 +37,7 @@
             ref="codeEditor"
             v-model="code"
             :theme="isDark ? 'vs-dark' : 'vs-light'"
-            language="python"
+            language="javascript"
             @change="handleCodeChange"
           />
         </div>
@@ -115,19 +115,19 @@ const total = numbers.reduce((sum, num) => sum + num, 0);
 console.log('La suma de [' + numbers.join(', ') + '] es: ' + total);
 
 // Bucles
-console.log("\nConteo regresivo:");
+console.log('Conteo regresivo:');
 for (let i = 5; i > 0; i--) {
     console.log('Número: ' + i);
 }
-console.log("¡Listo!");
+console.log('¡Listo!');
 
 // Funciones
 function saludar(nombre) {
     return '¡Hola ' + nombre + '!';
 }
 
-const resultado = saludar("Usuario");
-console.log('\n' + resultado);
+const resultado = saludar('Usuario');
+console.log(resultado);
 `)
 
 const isDark = ref(false)
