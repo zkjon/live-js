@@ -65,6 +65,8 @@ onMounted(() => {
 </script>
 
 <style>
+@reference "tailwindcss";
+
 /* Estilos globales adicionales */
 #app {
   min-height: 100vh;
@@ -109,7 +111,8 @@ onMounted(() => {
 
 /* Estilos para elementos de carga */
 .loading-spinner {
-  @apply animate-spin rounded-full border-2 border-gray-300 border-t-green-600;
+  @apply rounded-full border-2 border-gray-300 border-t-green-600;
+  animation: var(--animate-spin);
 }
 
 /* Estilos para notificaciones toast (si se implementan) */

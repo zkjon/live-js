@@ -1,11 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@reference 'tailwindcss';
 
-/* Estilos globales para Live JS Coding */
 
 /* Variables CSS personalizadas */
-:root {
+@theme {
   --color-primary: #10b981; /* green-500 */
   --color-primary-dark: #059669; /* green-600 */
   --color-secondary: #6b7280; /* gray-500 */
@@ -17,6 +15,12 @@
   --color-error: #ef4444; /* red-500 */
   --color-warning: #f59e0b; /* amber-500 */
   --color-success: #10b981; /* green-500 */
+  
+  /* Animaciones personalizadas */
+  --animate-fade-in: fadeIn 0.3s ease-out;
+  --animate-slide-in: slideIn 0.3s ease-out;
+  --animate-pulse-slow: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin: spin 1s linear infinite;
 }
 
 /* Tema oscuro */
@@ -120,17 +124,16 @@ body {
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.animate-slide-in {
-  animation: slideIn 0.3s ease-out;
-}
-
-.animate-pulse-slow {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
+/* Las animaciones ahora están definidas en @theme como variables CSS */
 
 /* Estilos para botones */
 .btn {
@@ -189,11 +192,12 @@ body {
 
 /* Estilos para modales */
 .modal-overlay {
-  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+  @apply fixed inset-0 bg-black bg-black/50 flex items-center justify-center z-50;
 }
 
 .modal-content {
-  @apply bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-fade-in;
+  @apply bg-white rounded-lg shadow-xl max-w-md w-full mx-4;
+  animation: var(--animate-fade-in);
 }
 
 .dark .modal-content {
