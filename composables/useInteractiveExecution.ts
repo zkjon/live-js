@@ -20,19 +20,40 @@ export const useInteractiveExecution = () => {
     executionTime: 0
   })
 
-  // Conectar al WebSocket
+  // Detectar si estamos en producción (Vercel)
+  const isProduction = process.env.NODE_ENV === 'production'
+  const supportsWebSockets = !isProduction
+
+  // Conectar al WebSocket (solo en desarrollo)
   const connect = () => {
+    if (!supportsWebSockets) {
+      console.warn('WebSockets not supported in production. Using fallback API.')
+      return
+    }
+
     if (socket.value?.connected) return
 
-    socket.value = io({
-      path: '/api/websocket',
-      transports: ['websocket']
-    })
+    try {
+      socket.value = io({
+        path: '/api/websocket',
+        transports: ['websocket'],
+        timeout: 5000,
+        forceNew: true
+      })
 
-    // Manejar conexión
-    socket.value.on('connect', () => {
-      console.log('Conectado al WebSocket')
-    })
+      // Manejar conexión
+      socket.value.on('connect', () => {
+        console.log('Connected to WebSocket')
+      })
+
+      // Manejar error de conexión
+      socket.value.on('connect_error', (error) => {
+        console.error('WebSocket connection failed:', error)
+        state.error = 'WebSocket connection failed. Using fallback mode.'
+      })
+    } catch (error) {
+      console.error('Failed to initialize WebSocket:', error)
+    }
 
     // Manejar output
     socket.value.on('output', (data: { data: string }) => {
@@ -59,24 +80,46 @@ export const useInteractiveExecution = () => {
       state.executionTime = data.executionTime
       
       if (!data.success && data.exitCode !== 0) {
-        state.error += `\nProceso terminado con código de salida: ${data.exitCode}`
+        state.error += `\nProcess terminated with exit code: ${data.exitCode}`
       }
     })
 
     // Manejar desconexión
     socket.value.on('disconnect', () => {
-      console.log('Desconectado del WebSocket')
+      console.log('Disconnected from WebSocket')
       state.isExecuting = false
       state.isWaitingForInput = false
     })
   }
 
+  // Ejecutar código usando API REST (fallback)
+  const executeCodeWithAPI = async (code: string, timeout = 30) => {
+    try {
+      const response = await $fetch('/api/execute', {
+        method: 'POST',
+        body: {
+          code,
+          timeout: timeout * 1000 // Convert to milliseconds
+        }
+      })
+
+      if (response.output) {
+        state.output = response.output
+      }
+      if (response.error) {
+        state.error = response.error
+      }
+      
+      state.isExecuting = false
+      state.executionTime = response.executionTime || 0
+    } catch (error: any) {
+      state.error = error.message || 'Execution failed'
+      state.isExecuting = false
+    }
+  }
+
   // Ejecutar código
   const executeCode = (code: string, timeout = 30) => {
-    if (!socket.value?.connected) {
-      connect()
-    }
-
     // Limpiar estado anterior
     state.output = ''
     state.error = ''
@@ -85,17 +128,26 @@ export const useInteractiveExecution = () => {
     state.inputPrompt = ''
     state.executionTime = 0
 
-    // Enviar código para ejecutar
-    socket.value?.emit('execute', {
-      type: 'execute',
-      code,
-      timeout
-    })
+    if (supportsWebSockets) {
+      // Usar WebSockets en desarrollo
+      if (!socket.value?.connected) {
+        connect()
+      }
+      
+      socket.value?.emit('execute', {
+        type: 'execute',
+        code,
+        timeout
+      })
+    } else {
+      // Usar API REST en producción
+      executeCodeWithAPI(code, timeout)
+    }
   }
 
   // Enviar input del usuario
   const sendUserInput = (input: string) => {
-    if (socket.value?.connected && state.isWaitingForInput) {
+    if (supportsWebSockets && socket.value?.connected && state.isWaitingForInput) {
       socket.value.emit('user_input', {
         type: 'input',
         value: input
@@ -103,6 +155,12 @@ export const useInteractiveExecution = () => {
       
       // Agregar el input al output para mostrarlo
       state.output += input + '\n'
+      state.isWaitingForInput = false
+      state.inputPrompt = ''
+    } else if (!supportsWebSockets) {
+      // En producción, mostrar mensaje informativo
+      state.output += `Input: ${input}\n`
+      state.output += 'Note: Interactive input() is not supported in production deployment.\n'
       state.isWaitingForInput = false
       state.inputPrompt = ''
     }

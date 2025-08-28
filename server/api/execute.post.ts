@@ -6,14 +6,14 @@ export default defineEventHandler(async (event) => {
     if (!code || typeof code !== 'string') {
       throw createError({
         statusCode: 400,
-        statusMessage: 'El código Python es requerido'
+        statusMessage: 'Python code is required'
       })
     }
 
     if (timeout < 1 || timeout > 60) {
       throw createError({
         statusCode: 400,
-        statusMessage: 'El timeout debe estar entre 1 y 60 segundos'
+        statusMessage: 'Timeout must be between 1 and 60 seconds'
       })
     }
 
@@ -125,7 +125,7 @@ export default defineEventHandler(async (event) => {
       success,
       output,
       error,
-      execution_time: executionTime
+      executionTime: executionTime
     }
     
   } catch (error: any) {
