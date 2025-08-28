@@ -45,16 +45,32 @@
       
       <!-- Panel de Output (40%) -->
       <div class="w-2/5 p-4 pl-0">
-        <InteractiveConsole 
-          :output="output"
-          :error="error"
-          :is-executing="isExecuting"
-          :is-waiting-for-input="isWaitingForInput"
-          :input-prompt="inputPrompt"
-          :execution-time="executionTime"
-          @user-input="handleUserInput"
-          @clear="clearOutput"
-        />
+        <div class="h-full bg-black rounded-lg p-4 overflow-auto font-mono text-sm">
+          <!-- Output del código -->
+          <div class="output-content whitespace-pre-wrap">
+            <!-- Output normal -->
+            <div v-if="output" class="text-green-400">{{ output }}</div>
+            
+            <!-- Errores -->
+            <div v-if="error" class="text-red-400">{{ error }}</div>
+            
+            <!-- Execution indicator -->
+            <div v-if="isExecuting" class="text-yellow-400 flex items-center gap-2">
+              <div class="animate-spin w-3 h-3 border border-yellow-400 border-t-transparent rounded-full"></div>
+              Executing code...
+            </div>
+            
+            <!-- Initial state -->
+            <div v-if="!output && !error && !isExecuting" class="text-gray-500">
+              Press 'Run' to see the results
+            </div>
+          </div>
+          
+          <!-- Execution information -->
+          <div v-if="executionTime > 0" class="text-gray-400 text-xs mt-4 pt-2 border-t border-gray-700">
+            Execution time: {{ executionTime }}ms
+          </div>
+        </div>
       </div>
     </div>
     
@@ -75,43 +91,45 @@
 </template>
 
 <script setup lang="ts">
-// Importar el composable interactivo
+// Importar el composable simplificado (solo API REST)
 const {
 	isExecuting,
 	output,
 	error,
-	isWaitingForInput,
-	inputPrompt,
 	executionTime,
-	connect,
 	executeCode,
-	sendUserInput,
 	clearOutput,
 } = useInteractiveExecution()
 
 // Code and theme state
-const code = ref(`# Countdown program
-number = int(input("Enter a number to start countdown: "))
+const code = ref(`# ¡Bienvenido a Live Python Coding!
+# Escribe tu código Python aquí y presiona "Run"
+# Editor de Python simple y rápido
 
-# Validate input is positive
-if number < 0:
-    print("Please enter a positive number")
-else:
-    # Countdown loop
-    print("Starting countdown...")
-    for i in range(number, -1, -1):
-        print(i)
-        
-print("Countdown complete!")
+# Ejemplo básico
+print("¡Hola mundo!")
+
+# Cálculos
+numbers = [1, 2, 3, 4, 5]
+total = sum(numbers)
+print(f"La suma de {numbers} es: {total}")
+
+# Bucles
+print("\nConteo regresivo:")
+for i in range(5, 0, -1):
+    print(f"Número: {i}")
+print("¡Listo!")
+
+# Funciones
+def saludar(nombre):
+    return f"¡Hola {nombre}!"
+
+resultado = saludar("Usuario")
+print(f"\n{resultado}")
 `)
 
 const isDark = ref(false)
 const _codeEditor = ref()
-
-// Connect to WebSocket on mount
-onMounted(() => {
-	connect()
-})
 
 // Handlers
 const handleExecute = async () => {
@@ -122,10 +140,6 @@ const handleExecute = async () => {
 const handleClear = () => {
 	code.value = ''
 	clearOutput()
-}
-
-const handleUserInput = (input: string) => {
-	sendUserInput(input)
 }
 
 const handleCodeChange = (_newCode: string) => {
