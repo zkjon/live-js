@@ -18,7 +18,7 @@ export const useCodeExecution = () => {
 	const error = ref('')
 	const executionTime = ref<number | null>(null)
 
-	// Ejecutar código Python
+	// Ejecutar código JavaScript
 	const executeCode = async (code: string, timeout: number = 10): Promise<ExecutionResult> => {
 		if (!code.trim()) {
 			throw new Error('No hay código para ejecutar')

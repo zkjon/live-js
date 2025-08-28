@@ -21,15 +21,15 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			title: 'Live Python Coding',
-			meta: [
-				{ charset: 'utf-8' },
-				{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-				{
-					name: 'description',
-					content: 'Minimalist platform for writing and executing Python code in real time',
-				},
-			],
+			title: 'Live JavaScript Coding',
+		meta: [
+			{ charset: 'utf-8' },
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
+			{
+				name: 'description',
+				content: 'Minimalist platform for writing and executing JavaScript code in real time',
+			},
+		],
 		},
 	},
 })

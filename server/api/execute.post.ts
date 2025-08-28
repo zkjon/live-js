@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 		if (!code || typeof code !== 'string') {
 			throw createError({
 				statusCode: 400,
-				statusMessage: 'Python code is required',
+				statusMessage: 'JavaScript code is required',
 			})
 		}
 

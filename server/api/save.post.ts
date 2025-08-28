@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
 		if (!code || typeof code !== 'string') {
 			throw createError({
 				statusCode: 400,
-				statusMessage: 'El código Python es requerido',
+				statusMessage: 'El código JavaScript es requerido',
 			})
 		}
 
@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
 		const savedCode = {
 			id,
 			code,
-			title: title || `Código Python - ${now.toLocaleDateString()}`,
+			title: title || `Código JavaScript - ${now.toLocaleDateString()}`,
 			created_at: now,
 			updated_at: now,
 		}

@@ -65,8 +65,8 @@
 <script setup lang="ts">
 // Configuración de la página
 useHead({
-	title: 'Código Compartido - Live Python Coding',
-	meta: [{ name: 'description', content: 'Visualiza código Python compartido' }],
+	title: 'Código Compartido - Live JavaScript Coding',
+		meta: [{ name: 'description', content: 'Visualiza código JavaScript compartido' }],
 })
 
 // Obtener el token de la URL

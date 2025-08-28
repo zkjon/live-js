@@ -40,7 +40,7 @@
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
               </svg>
-              <span class="font-medium">Live Python</span>
+              <span class="font-medium">Live JavaScript</span>
             </NuxtLink>
             <div class="h-6 w-px bg-gray-300"></div>
             <div>
@@ -139,10 +139,10 @@ const copied = ref(false)
 // Meta tags dinámicos
 if (data.value) {
 	useSeoMeta({
-		title: `${data.value.title} - Live Python`,
-		description: `Código Python compartido: ${data.value.title}`,
-		ogTitle: `${data.value.title} - Live Python`,
-		ogDescription: `Código Python compartido: ${data.value.title}`,
+		title: `${data.value.title} - Live JavaScript`,
+		description: `Código JavaScript compartido: ${data.value.title}`,
+		ogTitle: `${data.value.title} - Live JavaScript`,
+		ogDescription: `Código JavaScript compartido: ${data.value.title}`,
 		ogType: 'article',
 		twitterCard: 'summary',
 	})

@@ -120,17 +120,17 @@ const _copyToClipboard = async () => {
 }
 
 const _shareViaEmail = () => {
-	const subject = encodeURIComponent('Código Python compartido')
+	const subject = encodeURIComponent('Código JavaScript compartido')
 	const body = encodeURIComponent(
-		`Hola,\n\nTe comparto este código Python:\n\n${props.shareUrl}\n\n¡Échale un vistazo!`
+		`Hola,\n\nTe comparto este código JavaScript:\n\n${props.shareUrl}\n\n¡Échale un vistazo!`
 	)
-	window.open(`mailto:?subject=${subject}&body=${body}`)
+	return `mailto:?subject=${subject}&body=${body}`
 }
 
-const _shareViaTwitter = () => {
-	const text = encodeURIComponent(`Echa un vistazo a este código Python que estoy trabajando:`)
+const getTwitterUrl = () => {
+	const text = encodeURIComponent(`Echa un vistazo a este código JavaScript que estoy trabajando:`)
 	const url = encodeURIComponent(props.shareUrl)
-	window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')
+	return `https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')
 }
 
 // Auto-seleccionar la URL cuando se abre el modal
