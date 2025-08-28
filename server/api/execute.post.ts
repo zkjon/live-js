@@ -80,11 +80,7 @@ export default defineEventHandler(async (event) => {
 					})
 
 					pythonProcess.on('error', (err) => {
-					if (err.code === 'ENOENT') {
-						error = 'Python no está disponible en este entorno. Intenta usar Railway para funcionalidad completa.'
-					} else {
-						error = `Error al ejecutar Python: ${err.message}`
-					}
+					error = `Error al ejecutar Python: ${err.message}`
 					success = false
 					reject(err)
 				})
