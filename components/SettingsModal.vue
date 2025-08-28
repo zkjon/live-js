@@ -110,43 +110,43 @@
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 interface Emits {
-  (e: 'close'): void
-  (e: 'settings-changed', settings: any): void
+	(e: 'close'): void
+	(e: 'settings-changed', settings: any): void
 }
 
 const emit = defineEmits<Emits>()
 
 // Configuración por defecto
 const settings = ref({
-  fontSize: 14,
-  theme: 'vs-dark',
-  minimap: false,
-  wordWrap: true,
-  timeout: 10,
-  autoSave: true
+	fontSize: 14,
+	theme: 'vs-dark',
+	minimap: false,
+	wordWrap: true,
+	timeout: 10,
+	autoSave: true,
 })
 
 // Cargar configuración guardada
 onMounted(() => {
-  if (process.client) {
-    const savedSettings = localStorage.getItem('python-editor-settings')
-    if (savedSettings) {
-      try {
-        Object.assign(settings.value, JSON.parse(savedSettings))
-      } catch (e) {
-        console.warn('Error al cargar configuración:', e)
-      }
-    }
-  }
+	if (process.client) {
+		const savedSettings = localStorage.getItem('python-editor-settings')
+		if (savedSettings) {
+			try {
+				Object.assign(settings.value, JSON.parse(savedSettings))
+			} catch (e) {
+				console.warn('Error al cargar configuración:', e)
+			}
+		}
+	}
 })
 
 const saveSettings = () => {
-  if (process.client) {
-    localStorage.setItem('python-editor-settings', JSON.stringify(settings.value))
-  }
-  
-  emit('settings-changed', settings.value)
-  emit('close')
+	if (process.client) {
+		localStorage.setItem('python-editor-settings', JSON.stringify(settings.value))
+	}
+
+	emit('settings-changed', settings.value)
+	emit('close')
 }
 </script>
 

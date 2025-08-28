@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { ClipboardDocumentIcon, CheckIcon, PencilIcon, PlusIcon } from '@heroicons/vue/24/outline'
+import { CheckIcon, ClipboardDocumentIcon, PencilIcon, PlusIcon } from '@heroicons/vue/24/outline'
 
 // Obtener ID de la ruta
 const route = useRoute()
@@ -140,65 +140,68 @@ const copied = ref(false)
 
 // Meta tags dinámicos
 if (data.value) {
-  useSeoMeta({
-    title: `${data.value.title} - Live Python`,
-    description: `Código Python compartido: ${data.value.title}`,
-    ogTitle: `${data.value.title} - Live Python`,
-    ogDescription: `Código Python compartido: ${data.value.title}`,
-    ogType: 'article',
-    twitterCard: 'summary'
-  })
+	useSeoMeta({
+		title: `${data.value.title} - Live Python`,
+		description: `Código Python compartido: ${data.value.title}`,
+		ogTitle: `${data.value.title} - Live Python`,
+		ogDescription: `Código Python compartido: ${data.value.title}`,
+		ogType: 'article',
+		twitterCard: 'summary',
+	})
 }
 
 // Formatear fecha
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+	const date = new Date(dateString)
+	return date.toLocaleDateString('es-ES', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: '2-digit',
+		minute: '2-digit',
+	})
 }
 
 // Copiar código al portapapeles
 const copyCode = async () => {
-  if (!data.value) return
-  
-  try {
-    await navigator.clipboard.writeText(data.value.code)
-    copied.value = true
-    
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  } catch (error) {
-    console.error('Error al copiar código:', error)
-  }
+	if (!data.value) return
+
+	try {
+		await navigator.clipboard.writeText(data.value.code)
+		copied.value = true
+
+		setTimeout(() => {
+			copied.value = false
+		}, 2000)
+	} catch (error) {
+		console.error('Error al copiar código:', error)
+	}
 }
 
 // Abrir en el editor principal
 const openInEditor = () => {
-  if (!data.value) return
-  
-  // Guardar código en localStorage para que el editor principal lo cargue
-  localStorage.setItem('shared_code', JSON.stringify({
-    code: data.value.code,
-    title: data.value.title,
-    shared_id: data.value.id
-  }))
-  
-  // Navegar al editor principal
-  navigateTo('/')
+	if (!data.value) return
+
+	// Guardar código en localStorage para que el editor principal lo cargue
+	localStorage.setItem(
+		'shared_code',
+		JSON.stringify({
+			code: data.value.code,
+			title: data.value.title,
+			shared_id: data.value.id,
+		})
+	)
+
+	// Navegar al editor principal
+	navigateTo('/')
 }
 
 // Manejar errores 404
 if (error.value?.statusCode === 404) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Código no encontrado'
-  })
+	throw createError({
+		statusCode: 404,
+		statusMessage: 'Código no encontrado',
+	})
 }
 </script>
 

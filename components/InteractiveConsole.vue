@@ -49,17 +49,17 @@
 
 <script setup lang="ts">
 interface Props {
-  output: string
-  error: string
-  isExecuting: boolean
-  isWaitingForInput: boolean
-  inputPrompt: string
-  executionTime: number
+	output: string
+	error: string
+	isExecuting: boolean
+	isWaitingForInput: boolean
+	inputPrompt: string
+	executionTime: number
 }
 
 interface Emits {
-  (e: 'user-input', value: string): void
-  (e: 'clear'): void
+	(e: 'user-input', value: string): void
+	(e: 'clear'): void
 }
 
 const props = defineProps<Props>()
@@ -69,37 +69,40 @@ const userInput = ref('')
 const inputField = ref<HTMLInputElement>()
 
 // Focus input field when input is requested
-watch(() => props.isWaitingForInput, (isWaiting) => {
-  if (isWaiting) {
-    nextTick(() => {
-      inputField.value?.focus()
-    })
-  }
-})
+watch(
+	() => props.isWaitingForInput,
+	(isWaiting) => {
+		if (isWaiting) {
+			nextTick(() => {
+				inputField.value?.focus()
+			})
+		}
+	}
+)
 
 // Handle input submission
 const handleSubmitInput = () => {
-  if (userInput.value.trim()) {
-    emit('user-input', userInput.value.trim())
-    userInput.value = ''
-  }
+	if (userInput.value.trim()) {
+		emit('user-input', userInput.value.trim())
+		userInput.value = ''
+	}
 }
 
 // Handle input cancellation
 const handleCancelInput = () => {
-  userInput.value = ''
-  // Could emit a cancellation event if needed
+	userInput.value = ''
+	// Could emit a cancellation event if needed
 }
 
 // Auto-scroll to bottom when there's new content
 const consoleElement = ref<HTMLElement>()
 
 watch([() => props.output, () => props.error, () => props.isWaitingForInput], () => {
-  nextTick(() => {
-    if (consoleElement.value) {
-      consoleElement.value.scrollTop = consoleElement.value.scrollHeight
-    }
-  })
+	nextTick(() => {
+		if (consoleElement.value) {
+			consoleElement.value.scrollTop = consoleElement.value.scrollHeight
+		}
+	})
 })
 </script>
 

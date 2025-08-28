@@ -42,38 +42,36 @@
 import { TrashIcon } from '@heroicons/vue/24/outline'
 
 interface Props {
-  output?: string
-  error?: string
-  isExecuting?: boolean
-  executionTime?: number | null
+	output?: string
+	error?: string
+	isExecuting?: boolean
+	executionTime?: number | null
 }
 
-interface Emits {
-  (e: 'clear'): void
-}
+type Emits = (e: 'clear') => void
 
 const props = withDefaults(defineProps<Props>(), {
-  output: '',
-  error: '',
-  isExecuting: false,
-  executionTime: null
+	output: '',
+	error: '',
+	isExecuting: false,
+	executionTime: null,
 })
 
 const emit = defineEmits<Emits>()
 
 const clearOutput = () => {
-  emit('clear')
+	emit('clear')
 }
 
 // Auto-scroll al final cuando hay nuevo output
 const outputContainer = ref<HTMLElement>()
 
 watch([() => props.output, () => props.error], () => {
-  nextTick(() => {
-    if (outputContainer.value) {
-      outputContainer.value.scrollTop = outputContainer.value.scrollHeight
-    }
-  })
+	nextTick(() => {
+		if (outputContainer.value) {
+			outputContainer.value.scrollTop = outputContainer.value.scrollHeight
+		}
+	})
 })
 </script>
 

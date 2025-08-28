@@ -7,58 +7,60 @@
 <script setup lang="ts">
 // Global application configuration
 useHead({
-  htmlAttrs: {
-    lang: 'en'
-  },
-  meta: [
-    { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { name: 'format-detection', content: 'telephone=no' }
-  ]
+	htmlAttrs: {
+		lang: 'en',
+	},
+	meta: [
+		{ charset: 'utf-8' },
+		{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
+		{ name: 'format-detection', content: 'telephone=no' },
+	],
 })
 
 // SEO por defecto
 useSeoMeta({
-  title: 'Live Python - Editor de código Python en línea',
-  description: 'Editor de código Python en tiempo real con ejecución instantánea. Escribe, ejecuta y comparte código Python directamente en tu navegador.',
-  ogTitle: 'Live Python - Editor de código Python en línea',
-  ogDescription: 'Editor de código Python en tiempo real con ejecución instantánea. Escribe, ejecuta y comparte código Python directamente en tu navegador.',
-  ogImage: '/og-image.png',
-  ogType: 'website',
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'Live Python - Editor de código Python en línea',
-  twitterDescription: 'Editor de código Python en tiempo real con ejecución instantánea.',
-  twitterImage: '/og-image.png'
+	title: 'Live Python - Editor de código Python en línea',
+	description:
+		'Editor de código Python en tiempo real con ejecución instantánea. Escribe, ejecuta y comparte código Python directamente en tu navegador.',
+	ogTitle: 'Live Python - Editor de código Python en línea',
+	ogDescription:
+		'Editor de código Python en tiempo real con ejecución instantánea. Escribe, ejecuta y comparte código Python directamente en tu navegador.',
+	ogImage: '/og-image.png',
+	ogType: 'website',
+	twitterCard: 'summary_large_image',
+	twitterTitle: 'Live Python - Editor de código Python en línea',
+	twitterDescription: 'Editor de código Python en tiempo real con ejecución instantánea.',
+	twitterImage: '/og-image.png',
 })
 
 // Configuración de tema por defecto
 onMounted(() => {
-  // Cargar configuración guardada del usuario
-  const savedSettings = localStorage.getItem('live-python-settings')
-  if (savedSettings) {
-    try {
-      const settings = JSON.parse(savedSettings)
-      
-      // Aplicar tema
-      if (settings.theme === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-      
-      // Aplicar otras configuraciones globales si es necesario
-    } catch (error) {
-      console.error('Error al cargar configuración:', error)
-    }
-  }
-  
-  // Detectar preferencia de tema del sistema si no hay configuración guardada
-  if (!savedSettings) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    if (prefersDark) {
-      document.documentElement.classList.add('dark')
-    }
-  }
+	// Cargar configuración guardada del usuario
+	const savedSettings = localStorage.getItem('live-python-settings')
+	if (savedSettings) {
+		try {
+			const settings = JSON.parse(savedSettings)
+
+			// Aplicar tema
+			if (settings.theme === 'dark') {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+
+			// Aplicar otras configuraciones globales si es necesario
+		} catch (error) {
+			console.error('Error al cargar configuración:', error)
+		}
+	}
+
+	// Detectar preferencia de tema del sistema si no hay configuración guardada
+	if (!savedSettings) {
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+		if (prefersDark) {
+			document.documentElement.classList.add('dark')
+		}
+	}
 })
 </script>
 

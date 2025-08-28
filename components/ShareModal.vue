@@ -87,21 +87,19 @@
 </template>
 
 <script setup lang="ts">
-import { 
-  XMarkIcon, 
-  ClipboardIcon, 
-  CheckIcon, 
-  InformationCircleIcon,
-  EnvelopeIcon
+import {
+	CheckIcon,
+	ClipboardIcon,
+	EnvelopeIcon,
+	InformationCircleIcon,
+	XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
 interface Props {
-  shareUrl: string
+	shareUrl: string
 }
 
-interface Emits {
-  (e: 'close'): void
-}
+type Emits = (e: 'close') => void
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
@@ -110,44 +108,46 @@ const urlInput = ref<HTMLInputElement>()
 const copied = ref(false)
 
 const copyToClipboard = async () => {
-  try {
-    await navigator.clipboard.writeText(props.shareUrl)
-    copied.value = true
-    
-    // Resetear el estado después de 2 segundos
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Error al copiar al portapapeles:', err)
-    
-    // Fallback: seleccionar el texto
-    if (urlInput.value) {
-      urlInput.value.select()
-      urlInput.value.setSelectionRange(0, 99999) // Para móviles
-    }
-  }
+	try {
+		await navigator.clipboard.writeText(props.shareUrl)
+		copied.value = true
+
+		// Resetear el estado después de 2 segundos
+		setTimeout(() => {
+			copied.value = false
+		}, 2000)
+	} catch (err) {
+		console.error('Error al copiar al portapapeles:', err)
+
+		// Fallback: seleccionar el texto
+		if (urlInput.value) {
+			urlInput.value.select()
+			urlInput.value.setSelectionRange(0, 99999) // Para móviles
+		}
+	}
 }
 
 const shareViaEmail = () => {
-  const subject = encodeURIComponent('Código Python compartido')
-  const body = encodeURIComponent(`Hola,\n\nTe comparto este código Python:\n\n${props.shareUrl}\n\n¡Échale un vistazo!`)
-  window.open(`mailto:?subject=${subject}&body=${body}`)
+	const subject = encodeURIComponent('Código Python compartido')
+	const body = encodeURIComponent(
+		`Hola,\n\nTe comparto este código Python:\n\n${props.shareUrl}\n\n¡Échale un vistazo!`
+	)
+	window.open(`mailto:?subject=${subject}&body=${body}`)
 }
 
 const shareViaTwitter = () => {
-  const text = encodeURIComponent(`Echa un vistazo a este código Python que estoy trabajando:`)
-  const url = encodeURIComponent(props.shareUrl)
-  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')
+	const text = encodeURIComponent(`Echa un vistazo a este código Python que estoy trabajando:`)
+	const url = encodeURIComponent(props.shareUrl)
+	window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')
 }
 
 // Auto-seleccionar la URL cuando se abre el modal
 onMounted(() => {
-  nextTick(() => {
-    if (urlInput.value) {
-      urlInput.value.select()
-    }
-  })
+	nextTick(() => {
+		if (urlInput.value) {
+			urlInput.value.select()
+		}
+	})
 })
 </script>
 

@@ -8,25 +8,25 @@
 // Import Monaco Editor only on client
 let monaco: any = null
 if (process.client) {
-  monaco = await import('monaco-editor')
+	monaco = await import('monaco-editor')
 }
 
 interface Props {
-  modelValue: string
-  language?: string
-  theme?: string
-  readonly?: boolean
+	modelValue: string
+	language?: string
+	theme?: string
+	readonly?: boolean
 }
 
 interface Emits {
-  (e: 'update:modelValue', value: string): void
-  (e: 'change', value: string): void
+	(e: 'update:modelValue', value: string): void
+	(e: 'change', value: string): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  language: 'python',
-  theme: 'vs-dark',
-  readonly: false
+	language: 'python',
+	theme: 'vs-dark',
+	readonly: false,
 })
 
 const emit = defineEmits<Emits>()
@@ -35,109 +35,117 @@ const editorContainer = ref<HTMLElement>()
 let editor: monaco.editor.IStandaloneCodeEditor | null = null
 
 onMounted(async () => {
-  if (!editorContainer.value || !process.client) return
+	if (!editorContainer.value || !process.client) return
 
-  // Load Monaco Editor if not available
-  if (!monaco) {
-    monaco = await import('monaco-editor')
-  }
+	// Load Monaco Editor if not available
+	if (!monaco) {
+		monaco = await import('monaco-editor')
+	}
 
-  // Configure Monaco Editor
-  editor = monaco.editor.create(editorContainer.value, {
-    value: props.modelValue,
-    language: props.language,
-    theme: props.theme,
-    automaticLayout: true,
-    fontSize: 14,
-    fontFamily: 'Consolas, Monaco, monospace',
-    lineNumbers: 'on',
-    minimap: { enabled: false },
-    scrollBeyondLastLine: false,
-    wordWrap: 'on',
-    readOnly: props.readonly,
-    tabSize: 4,
-    insertSpaces: true,
-    renderWhitespace: 'selection',
-    cursorBlinking: 'smooth',
-    smoothScrolling: true,
-    contextmenu: false,
-    selectOnLineNumbers: true,
-    roundedSelection: false,
-    renderLineHighlight: 'line',
-    bracketPairColorization: {
-      enabled: true
-    },
-    // Additional configurations to fix cursor
-    fontLigatures: false,
-    letterSpacing: 0,
-    lineHeight: 0,
-    cursorStyle: 'line',
-    cursorWidth: 1,
-    disableLayerHinting: true,
-    fontWeight: 'normal',
-    renderFinalNewline: false
-  })
+	// Configure Monaco Editor
+	editor = monaco.editor.create(editorContainer.value, {
+		value: props.modelValue,
+		language: props.language,
+		theme: props.theme,
+		automaticLayout: true,
+		fontSize: 14,
+		fontFamily: 'Consolas, Monaco, monospace',
+		lineNumbers: 'on',
+		minimap: { enabled: false },
+		scrollBeyondLastLine: false,
+		wordWrap: 'on',
+		readOnly: props.readonly,
+		tabSize: 4,
+		insertSpaces: true,
+		renderWhitespace: 'selection',
+		cursorBlinking: 'smooth',
+		smoothScrolling: true,
+		contextmenu: false,
+		selectOnLineNumbers: true,
+		roundedSelection: false,
+		renderLineHighlight: 'line',
+		bracketPairColorization: {
+			enabled: true,
+		},
+		// Additional configurations to fix cursor
+		fontLigatures: false,
+		letterSpacing: 0,
+		lineHeight: 0,
+		cursorStyle: 'line',
+		cursorWidth: 1,
+		disableLayerHinting: true,
+		fontWeight: 'normal',
+		renderFinalNewline: false,
+	})
 
-  // Listen to editor changes
-  editor.onDidChangeModelContent(() => {
-    if (editor) {
-      const value = editor.getValue()
-      emit('update:modelValue', value)
-      emit('change', value)
-    }
-  })
-  
-  // Force resize to fix cursor alignment
-  nextTick(() => {
-    if (editor) {
-      editor.layout()
-      // Additional layout fix with delay
-      setTimeout(() => {
-        if (editor) {
-          editor.layout()
-          editor.focus()
-        }
-      }, 100)
-    }
-  })
+	// Listen to editor changes
+	editor.onDidChangeModelContent(() => {
+		if (editor) {
+			const value = editor.getValue()
+			emit('update:modelValue', value)
+			emit('change', value)
+		}
+	})
+
+	// Force resize to fix cursor alignment
+	nextTick(() => {
+		if (editor) {
+			editor.layout()
+			// Additional layout fix with delay
+			setTimeout(() => {
+				if (editor) {
+					editor.layout()
+					editor.focus()
+				}
+			}, 100)
+		}
+	})
 })
 
 onUnmounted(() => {
-  if (editor) {
-    editor.dispose()
-  }
+	if (editor) {
+		editor.dispose()
+	}
 })
 
 // Update editor value when prop changes
-watch(() => props.modelValue, (newValue) => {
-  if (editor && editor.getValue() !== newValue) {
-    editor.setValue(newValue)
-  }
-})
+watch(
+	() => props.modelValue,
+	(newValue) => {
+		if (editor && editor.getValue() !== newValue) {
+			editor.setValue(newValue)
+		}
+	}
+)
 
 // Update theme when it changes
-watch(() => props.theme, (newTheme) => {
-  if (editor && monaco) {
-    monaco.editor.setTheme(newTheme)
-  }
-})
+watch(
+	() => props.theme,
+	(newTheme) => {
+		if (editor && monaco) {
+			monaco.editor.setTheme(newTheme)
+		}
+	}
+)
 
 // Expose editor methods
 defineExpose({
-  focus: () => editor?.focus(),
-  getSelection: () => editor?.getSelection(),
-  setSelection: (selection: any) => editor?.setSelection(selection),
-  insertText: (text: string) => {
-    if (editor) {
-      const selection = editor.getSelection()
-      if (selection) {
-        editor.executeEdits('', [{
-          range: selection,
-          text: text
-        }])
-      }
-    }
-  }
+	focus: () => editor?.focus(),
+	getSelection: () => editor?.getSelection(),
+	setSelection: (selection: any) => editor?.setSelection(selection),
+	insertText: (text: string) => {
+		if (editor) {
+			const selection = editor.getSelection()
+			if (selection) {
+				editor.executeEdits('', [
+					{
+						range: selection,
+						text: text,
+					},
+				])
+			}
+		}
+	},
 })
 </script>
 

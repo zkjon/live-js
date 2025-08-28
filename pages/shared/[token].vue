@@ -63,14 +63,12 @@
 </template>
 
 <script setup lang="ts">
-import { ClipboardIcon, CheckIcon } from '@heroicons/vue/24/outline'
+import { CheckIcon, ClipboardIcon } from '@heroicons/vue/24/outline'
 
 // Configuración de la página
 useHead({
-  title: 'Código Compartido - Live Python Coding',
-  meta: [
-    { name: 'description', content: 'Visualiza código Python compartido' }
-  ]
+	title: 'Código Compartido - Live Python Coding',
+	meta: [{ name: 'description', content: 'Visualiza código Python compartido' }],
 })
 
 // Obtener el token de la URL
@@ -81,48 +79,52 @@ const token = route.params.token as string
 const copied = ref(false)
 
 // Cargar código compartido
-const { data: sharedCode, pending, error } = await useFetch(`/api/share/${token}`, {
-  server: false
+const {
+	data: sharedCode,
+	pending,
+	error,
+} = await useFetch(`/api/share/${token}`, {
+	server: false,
 })
 
 // Métodos
 const copyCode = async () => {
-  if (!sharedCode.value?.code) return
-  
-  try {
-    await navigator.clipboard.writeText(sharedCode.value.code)
-    copied.value = true
-    
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Error al copiar código:', err)
-  }
+	if (!sharedCode.value?.code) return
+
+	try {
+		await navigator.clipboard.writeText(sharedCode.value.code)
+		copied.value = true
+
+		setTimeout(() => {
+			copied.value = false
+		}, 2000)
+	} catch (err) {
+		console.error('Error al copiar código:', err)
+	}
 }
 
 const formatDate = (dateString: string | undefined) => {
-  if (!dateString) return ''
-  
-  try {
-    return new Date(dateString).toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  } catch {
-    return dateString
-  }
+	if (!dateString) return ''
+
+	try {
+		return new Date(dateString).toLocaleDateString('es-ES', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
+		})
+	} catch {
+		return dateString
+	}
 }
 
 // Manejar errores 404
 if (error.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Código no encontrado'
-  })
+	throw createError({
+		statusCode: 404,
+		statusMessage: 'Código no encontrado',
+	})
 }
 </script>
 
