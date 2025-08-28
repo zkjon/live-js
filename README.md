@@ -165,33 +165,13 @@ bun run preview
 
 ## 🔒 Security
 
-### Security Measures
-- **JavaScript execution sandboxing**
-- **Timeout** to prevent infinite loops
-- **Memory and CPU limits**
-- **Input/output sanitization**
-- **Process isolation**
-- **CORS** properly configured
-
-### Limitations
-- System module imports are restricted
-- Limited file system access
-- Execution in isolated environment
+Security is a top priority for Live JS. For detailed information about our security measures, reporting vulnerabilities, and best practices, please see our [Security Policy](SECURITY.md).
 
 ## 🤝 Contributing
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/new-feature`)
-3. **Commit** your changes (`git commit -am 'Add new feature'`)
-4. **Push** to the branch (`git push origin feature/new-feature`)
-5. **Open** a Pull Request
+We welcome contributions from the community! Whether you're fixing bugs, adding features, or improving documentation, your help is appreciated.
 
-### Contribution Guidelines
-- Follow existing code conventions
-- Add tests for new features
-- Update documentation when necessary
-- Use descriptive and clear commits
-- Use **Bun** as the package manager
+For detailed information about contributing, including development setup, coding standards, and the pull request process, please see our [Contributing Guide](CONTRIBUTING.md).
 
 ## 📄 License
 
