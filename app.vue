@@ -30,7 +30,7 @@ useSeoMeta({
 	twitterCard: 'summary_large_image',
 	twitterTitle: 'Live JS - Editor de código JavaScript en línea',
 	twitterDescription: 'Editor de código JavaScript en tiempo real con ejecución instantánea.',
-	twitterImage: '/og-image.png',
+	twitterImage: 'https://live-javascript.vercel.app/og-image.png',
 })
 
 // Configuración de tema por defecto
