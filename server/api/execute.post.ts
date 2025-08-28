@@ -27,9 +27,6 @@ export default defineEventHandler(async (event) => {
 		try {
 			// Importar módulos necesarios
 			const { spawn } = await import('node:child_process')
-			const { writeFileSync, unlinkSync } = await import('node:fs')
-			const { join } = await import('node:path')
-			const { randomUUID } = await import('node:crypto')
 
 			// Detectar si el código usa input() y manejarlo especialmente
 			let modifiedCode = code
@@ -44,18 +41,11 @@ export default defineEventHandler(async (event) => {
 				modifiedCode = `# Nota: input() fue reemplazado con valores de ejemplo\n# 1st number: 5, 2nd number: 3\n\n${modifiedCode}`
 			}
 
-			// Crear archivo temporal para código más complejo
-			const tempFileName = `temp_${randomUUID()}.py`
-			const tempFilePath = join(process.cwd(), tempFileName)
-
-			try {
-				writeFileSync(tempFilePath, modifiedCode)
-
-				// Ejecutar archivo Python
-				const pythonProcess = spawn('python', [tempFilePath], {
-					timeout: timeout * 1000,
-					stdio: ['pipe', 'pipe', 'pipe'],
-				})
+			// Ejecutar Python directamente desde stdin (sin archivos temporales)
+			const pythonProcess = spawn('python', ['-c', modifiedCode], {
+				timeout: timeout * 1000,
+				stdio: ['pipe', 'pipe', 'pipe'],
+			})
 
 				let stdout = ''
 				let stderr = ''
@@ -96,13 +86,6 @@ export default defineEventHandler(async (event) => {
 						resolve(-1)
 					}, timeout * 1000)
 				})
-			} finally {
-				// Limpiar archivo temporal
-				try {
-					unlinkSync(tempFilePath)
-				} catch (_cleanupError) {
-					// Ignorar errores de limpieza
-				}
 			}
 		} catch (err: unknown) {
 			const error_obj = err as Error
