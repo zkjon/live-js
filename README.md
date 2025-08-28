@@ -51,14 +51,13 @@ A modern web application for writing, executing, and sharing JavaScript code in 
 
 ### Development Tools
 - **Bun** - Ultra-fast runtime and package manager
-- **Vite** - Build tool with instant HMR
 - **Git** - Version control
 - **TypeScript** - Type-safe development
 
 ## 📦 Installation
 
 ### Prerequisites
-- **Bun** 1.0+ (recommended) or **Node.js** 18+
+- **Bun** 1.0+ (recommended) or **Node.js** 20+
 
 ### Installation Steps
 
@@ -99,41 +98,6 @@ http://localhost:3000
 1. Click "Clear" to reset the editor
 2. Code is automatically saved in your browser's local storage
 3. Your work persists between sessions
-
-## 🎨 Themes and Customization
-
-### Available Themes
-- **Light** - Minimalist theme with white background
-- **Dark** - Elegant theme with dark background
-- **Auto** - Automatically detects system preference
-
-### Color System
-- **Primary**: Green (#10B981)
-- **Secondary**: Gray (#6B7280)
-- **Success**: Green (#10B981)
-- **Error**: Red (#EF4444)
-- **Warning**: Yellow (#F59E0B)
-
-## 📱 Responsive Design
-
-The application is optimized for:
-- **Desktop** (1024px+) - Horizontal split panel
-- **Tablet** (768px-1023px) - Vertical split panel
-- **Mobile** (320px-767px) - Stacked layout
-
-## 🔧 Advanced Configuration
-
-### Environment Variables
-```env
-# Server port
-PORT=3000
-
-# Execution timeout (seconds)
-EXECUTION_TIMEOUT=30
-
-# Node.js memory limit (MB)
-NODE_MEMORY_LIMIT=128
-```
 
 ## 🧪 Development
 
