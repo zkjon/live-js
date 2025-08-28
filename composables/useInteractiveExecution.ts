@@ -99,7 +99,7 @@ export const useInteractiveExecution = () => {
         method: 'POST',
         body: {
           code,
-          timeout: timeout * 1000 // Convert to milliseconds
+          timeout: timeout // Keep in seconds for API
         }
       })
 
