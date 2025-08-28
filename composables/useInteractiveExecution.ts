@@ -20,9 +20,8 @@ export const useInteractiveExecution = () => {
 		executionTime: 0,
 	})
 
-	// Detectar si estamos en producción (Vercel)
-	const isProduction = process.env.NODE_ENV === 'production'
-	const supportsWebSockets = !isProduction
+	// Habilitar WebSockets para soporte de input() interactivo
+	const supportsWebSockets = true
 
 	// Conectar al WebSocket (solo en desarrollo)
 	const connect = () => {
@@ -35,9 +34,9 @@ export const useInteractiveExecution = () => {
 
 		try {
 			socket.value = io({
-				path: '/api/websocket',
-				transports: ['websocket'],
-				timeout: 5000,
+				path: '/api/socket.io',
+				transports: ['websocket', 'polling'],
+				timeout: 10000,
 				forceNew: true,
 			})
 

@@ -76,29 +76,33 @@
 
 <script setup lang="ts">
 // Importar el composable interactivo
-const { isExecuting, connect, executeCode, sendUserInput, clearOutput } = useInteractiveExecution()
+const {
+	isExecuting,
+	output,
+	error,
+	isWaitingForInput,
+	inputPrompt,
+	executionTime,
+	connect,
+	executeCode,
+	sendUserInput,
+	clearOutput,
+} = useInteractiveExecution()
 
 // Code and theme state
-const code = ref(`# Welcome to Live Python Coding!
-# Write your Python code here and press "Run"
-# Now you can use input() and it will be fully interactive!
+const code = ref(`# Countdown program
+number = int(input("Enter a number to start countdown: "))
 
-def sum_numbers(a, b):
-    return (a + b)
-
-a = int(input('Enter 1st number: '))
-b = int(input('Enter 2nd number: '))
-
-print(f'Sum of {a} and {b} is {sum_numbers(a, b)}')
-
-# Other examples:
-print("Hello, world!")
-print("This is a minimalist Python editor")
-
-# Calculation example
-numbers = [1, 2, 3, 4, 5]
-total = sum(numbers)
-print(f"The sum of {numbers} is: {total}")
+# Validate input is positive
+if number < 0:
+    print("Please enter a positive number")
+else:
+    # Countdown loop
+    print("Starting countdown...")
+    for i in range(number, -1, -1):
+        print(i)
+        
+print("Countdown complete!")
 `)
 
 const isDark = ref(false)
@@ -115,21 +119,21 @@ const handleExecute = async () => {
 	executeCode(code.value, 30)
 }
 
-const _handleClear = () => {
+const handleClear = () => {
 	code.value = ''
 	clearOutput()
 }
 
-const _handleUserInput = (input: string) => {
+const handleUserInput = (input: string) => {
 	sendUserInput(input)
 }
 
-const _handleCodeChange = (_newCode: string) => {
+const handleCodeChange = (_newCode: string) => {
 	// v-model already handles the update automatically
 	// This handler is available for additional logic if needed
 }
 
-const _toggleTheme = () => {
+const toggleTheme = () => {
 	isDark.value = !isDark.value
 	if (isDark.value) {
 		document.documentElement.classList.add('dark')
