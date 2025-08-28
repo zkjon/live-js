@@ -20,8 +20,9 @@ export const useInteractiveExecution = () => {
 		executionTime: 0,
 	})
 
-	// Habilitar WebSockets para soporte de input() interactivo
-	const supportsWebSockets = true
+	// Detectar automáticamente si WebSockets están disponibles
+	const isVercel = process.env.VERCEL || window?.location?.hostname?.includes('vercel.app')
+	const supportsWebSockets = !isVercel
 
 	// Conectar al WebSocket (solo en desarrollo)
 	const connect = () => {
