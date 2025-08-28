@@ -134,7 +134,7 @@ const settings = ref({
 // Cargar configuración guardada
 onMounted(() => {
 	if (process.client) {
-		const savedSettings = localStorage.getItem('javascript-editor-settings')
+		const savedSettings = localStorage.getItem('live-js-editor-settings')
 		if (savedSettings) {
 			try {
 				Object.assign(settings.value, JSON.parse(savedSettings))
@@ -147,7 +147,7 @@ onMounted(() => {
 
 const saveSettings = () => {
 	if (process.client) {
-		localStorage.setItem('javascript-editor-settings', JSON.stringify(settings.value))
+		localStorage.setItem('live-js-editor-settings', JSON.stringify(settings.value))
 	}
 
 	emit('settings-changed', settings.value)

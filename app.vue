@@ -19,16 +19,16 @@ useHead({
 
 // SEO por defecto
 useSeoMeta({
-	title: 'Live JavaScript - Editor de código JavaScript en línea',
+	title: 'Live JS - Editor de código JavaScript en línea',
 	description:
 		'Editor de código JavaScript en tiempo real con ejecución instantánea. Escribe, ejecuta y comparte código JavaScript directamente en tu navegador.',
-	ogTitle: 'Live JavaScript - Editor de código JavaScript en línea',
+	ogTitle: 'Live JS - Editor de código JavaScript en línea',
 	ogDescription:
 		'Editor de código JavaScript en tiempo real con ejecución instantánea. Escribe, ejecuta y comparte código JavaScript directamente en tu navegador.',
 	ogImage: '/og-image.png',
 	ogType: 'website',
 	twitterCard: 'summary_large_image',
-	twitterTitle: 'Live JavaScript - Editor de código JavaScript en línea',
+	twitterTitle: 'Live JS - Editor de código JavaScript en línea',
 	twitterDescription: 'Editor de código JavaScript en tiempo real con ejecución instantánea.',
 	twitterImage: '/og-image.png',
 })
@@ -36,7 +36,7 @@ useSeoMeta({
 // Configuración de tema por defecto
 onMounted(() => {
 	// Cargar configuración guardada del usuario
-	const savedSettings = localStorage.getItem('live-javascript-settings')
+	const savedSettings = localStorage.getItem('live-js-settings')
 	if (savedSettings) {
 		try {
 			const settings = JSON.parse(savedSettings)

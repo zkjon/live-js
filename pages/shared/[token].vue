@@ -65,7 +65,7 @@
 <script setup lang="ts">
 // Configuración de la página
 useHead({
-	title: 'Código Compartido - Live JavaScript Coding',
+	title: 'Código Compartido - Live JS Coding',
 		meta: [{ name: 'description', content: 'Visualiza código JavaScript compartido' }],
 })
 

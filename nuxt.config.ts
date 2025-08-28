@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			title: 'Live JavaScript Coding',
+			title: 'Live JS Coding',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -150,7 +150,7 @@ const toggleTheme = () => {
 
 // SEO
 useHead({
-	title: 'Live JavaScript Coding - Minimalist Editor',
+	title: 'Live JS - Minimalist Editor',
 	meta: [
 		{
 			name: 'description',

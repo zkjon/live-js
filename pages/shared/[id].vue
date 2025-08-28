@@ -40,7 +40,7 @@
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
               </svg>
-              <span class="font-medium">Live JavaScript</span>
+              <span class="font-medium">Live JS</span>
             </NuxtLink>
             <div class="h-6 w-px bg-gray-300"></div>
             <div>
@@ -139,9 +139,9 @@ const copied = ref(false)
 // Meta tags dinámicos
 if (data.value) {
 	useSeoMeta({
-		title: `${data.value.title} - Live JavaScript`,
+		title: `${data.value.title} - Live JS`,
 		description: `Código JavaScript compartido: ${data.value.title}`,
-		ogTitle: `${data.value.title} - Live JavaScript`,
+		ogTitle: `${data.value.title} - Live JS`,
 		ogDescription: `Código JavaScript compartido: ${data.value.title}`,
 		ogType: 'article',
 		twitterCard: 'summary',
