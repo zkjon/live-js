@@ -41,15 +41,8 @@ export default defineEventHandler(async (event) => {
 				modifiedCode = `# Nota: input() fue reemplazado con valores de ejemplo\n# 1st number: 5, 2nd number: 3\n\n${modifiedCode}`
 			}
 
-			// Intentar ejecutar Python (verificar disponibilidad)
-			let pythonCommand = 'python'
-			
-			// En Vercel, intentar python3 como alternativa
-			if (process.env.VERCEL) {
-				pythonCommand = 'python3'
-			}
-			
-			const pythonProcess = spawn(pythonCommand, ['-c', modifiedCode], {
+			// Ejecutar JavaScript con Node.js (disponible en Vercel)
+			const jsProcess = spawn('node', ['-e', modifiedCode], {
 				timeout: timeout * 1000,
 				stdio: ['pipe', 'pipe', 'pipe'],
 			})
@@ -58,17 +51,17 @@ export default defineEventHandler(async (event) => {
 				let stderr = ''
 
 				// Capturar output
-				pythonProcess.stdout.on('data', (data) => {
+				jsProcess.stdout.on('data', (data) => {
 					stdout += data.toString()
 				})
 
-				pythonProcess.stderr.on('data', (data) => {
+				jsProcess.stderr.on('data', (data) => {
 					stderr += data.toString()
 				})
 
 				// Esperar a que termine el proceso
 				await new Promise((resolve, reject) => {
-					pythonProcess.on('close', (code) => {
+					jsProcess.on('close', (code) => {
 						if (code === 0) {
 							output = stdout.trim()
 							success = true
@@ -79,20 +72,20 @@ export default defineEventHandler(async (event) => {
 						resolve(code)
 					})
 
-					pythonProcess.on('error', (err) => {
-					error = `Error al ejecutar Python: ${err.message}`
-					success = false
-					reject(err)
-				})
+					jsProcess.on('error', (err) => {
+						error = `Error al ejecutar JavaScript: ${err.message}`
+						success = false
+						reject(err)
+					})
 
 					// Timeout manual
 					setTimeout(() => {
-						pythonProcess.kill('SIGTERM')
+						jsProcess.kill('SIGTERM')
 						error = 'Timeout: El código tardó demasiado en ejecutarse'
 						success = false
 						resolve(-1)
-			}, timeout * 1000)
-		})
+					}, timeout * 1000)
+				})
 	} catch (err: unknown) {
 			const error_obj = err as Error
 			success = false

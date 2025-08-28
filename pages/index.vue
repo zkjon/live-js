@@ -102,30 +102,32 @@ const {
 } = useInteractiveExecution()
 
 // Code and theme state
-const code = ref(`# ¡Bienvenido a Live Python Coding!
-# Escribe tu código Python aquí y presiona "Run"
-# Editor de Python simple y rápido
+const code = ref(`// ¡Bienvenido a Live JavaScript Coding!
+// Escribe tu código JavaScript aquí y presiona "Run"
+// Editor de JavaScript simple y rápido
 
-# Ejemplo básico
-print("¡Hola mundo!")
+// Ejemplo básico
+console.log("¡Hola mundo!");
 
-# Cálculos
-numbers = [1, 2, 3, 4, 5]
-total = sum(numbers)
-print(f"La suma de {numbers} es: {total}")
+// Cálculos
+const numbers = [1, 2, 3, 4, 5];
+const total = numbers.reduce((sum, num) => sum + num, 0);
+console.log(\`La suma de [\${numbers.join(', ')}] es: \${total}\`);
 
-# Bucles
-print("\nConteo regresivo:")
-for i in range(5, 0, -1):
-    print(f"Número: {i}")
-print("¡Listo!")
+// Bucles
+console.log("\nConteo regresivo:");
+for (let i = 5; i > 0; i--) {
+    console.log(\`Número: \${i}\`);
+}
+console.log("¡Listo!");
 
-# Funciones
-def saludar(nombre):
-    return f"¡Hola {nombre}!"
+// Funciones
+function saludar(nombre) {
+    return \`¡Hola \${nombre}!\`;
+}
 
-resultado = saludar("Usuario")
-print(f"\n{resultado}")
+const resultado = saludar("Usuario");
+console.log(\`\n\${resultado}\`);
 `)
 
 const isDark = ref(false)
@@ -158,11 +160,11 @@ const toggleTheme = () => {
 
 // SEO
 useHead({
-	title: 'Live Python Coding - Minimalist Editor',
+	title: 'Live JavaScript Coding - Minimalist Editor',
 	meta: [
 		{
 			name: 'description',
-			content: 'Minimalist platform for writing and executing Python code in real time',
+			content: 'Minimalist platform for writing and executing JavaScript code in real time',
 		},
 	],
 })
