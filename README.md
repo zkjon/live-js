@@ -1,21 +1,20 @@
 <div align="middle">
-<img src="public/og-image.png" alt="Live Python" />
+<img src="public/og-image.png" alt="Live JS" />
 </div>
 
-## 🌟 Live Python
+## 🌟 Live JS
 
-A modern web application for writing, executing, and sharing Python code in real-time with a minimalist and elegant interface.
+A modern web application for writing, executing, and sharing JavaScript code in real-time with a minimalist and elegant interface.
 
 ### Code Editor
-- **Monaco Editor** with complete Python syntax highlighting
+- **Monaco Editor** with complete JavaScript syntax highlighting
 - **Line numbers** and cursor positioning
 - **Real-time syntax validation**
 - **Keyboard shortcuts** (Ctrl+Enter to execute)
 - **Professional code editing experience**
 
 ### Interactive Execution
-- **WebSockets** for real-time communication
-- **Interactive input()** support - fully functional user input
+- **Node.js** for real-time JavaScript execution
 - **Real-time output streaming** with live results
 - **Error handling** with detailed stack traces
 - **Execution timeout** to prevent infinite loops
@@ -47,9 +46,7 @@ A modern web application for writing, executing, and sharing Python code in real
 
 ### Backend
 - **Nitro** - Universal server engine
-- **Socket.io** - WebSockets for real-time communication
-- **Node.js** - JavaScript runtime
-- **Python** - Code execution engine
+- **Node.js** - JavaScript runtime and execution engine
 - **RESTful APIs** - Endpoints for saving and sharing code
 
 ### Development Tools
@@ -62,14 +59,13 @@ A modern web application for writing, executing, and sharing Python code in real
 
 ### Prerequisites
 - **Bun** 1.0+ (recommended) or **Node.js** 18+
-- **Python** 3.8+ (for code execution)
 
 ### Installation Steps
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/zkjon/live-python.git
-cd live-python
+git clone https://github.com/zkjon/live-js.git
+cd live-js
 ```
 
 2. **Install dependencies**
@@ -90,14 +86,9 @@ http://localhost:3000
 ## 🚀 Usage
 
 ### Writing Code
-1. Write your Python code in the left editor panel
+1. Write your JavaScript code in the left editor panel
 2. Use **Ctrl+Enter** to execute or click the "Run" button
 3. See real-time results in the right output panel
-
-### Interactive Input
-1. Use `input()` functions in your Python code
-2. When prompted, type your response in the interactive console
-3. Press Enter to submit your input and continue execution
 
 ### Theme Switching
 1. Click the "Light Theme" or "Dark Theme" button
@@ -140,23 +131,8 @@ PORT=3000
 # Execution timeout (seconds)
 EXECUTION_TIMEOUT=30
 
-# Python memory limit (MB)
-PYTHON_MEMORY_LIMIT=128
-```
-
-### Python Configuration
-By default, the application uses the system Python. To use a virtual environment:
-
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-
-# Install Python dependencies (optional)
-pip install numpy pandas matplotlib
+# Node.js memory limit (MB)
+NODE_MEMORY_LIMIT=128
 ```
 
 ## 🧪 Development
@@ -190,7 +166,7 @@ bun run preview
 ## 🔒 Security
 
 ### Security Measures
-- **Python execution sandboxing**
+- **JavaScript execution sandboxing**
 - **Timeout** to prevent infinite loops
 - **Memory and CPU limits**
 - **Input/output sanitization**
@@ -233,10 +209,10 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 Have questions or issues?
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/zkjon/live-python/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/zkjon/live-python/discussions)
-- 📖 **Documentation**: [Project Wiki](https://github.com/zkjon/live-python/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/zkjon/live-js/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/zkjon/live-js/discussions)
+- 📖 **Documentation**: [Project Wiki](https://github.com/zkjon/live-js/wiki)
 
 ---
 
-**Live Python coding! 🐍✨**
+**Live JavaScript coding! ⚡✨**
