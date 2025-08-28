@@ -1,240 +1,240 @@
-# Live Python - Editor de Código Python en Tiempo Real
+# Live Python - Real-Time Python Code Editor
 
-Una aplicación web moderna para escribir, ejecutar y compartir código Python en tiempo real con una interfaz minimalista y elegante.
+A modern web application for writing, executing, and sharing Python code in real-time with a minimalist and elegant interface.
 
-## 🚀 Características
+## 🚀 Features
 
-### Editor de Código
-- **Monaco Editor** con syntax highlighting completo para Python
-- **Autocompletado** y sugerencias inteligentes
-- **Detección de errores** en tiempo real
-- **Atajos de teclado** (Ctrl+Enter para ejecutar, Ctrl+S para guardar)
-- **Numeración de líneas** y minimapa opcional
+### Code Editor
+- **Monaco Editor** with complete Python syntax highlighting
+- **Line numbers** and cursor positioning
+- **Real-time syntax validation**
+- **Keyboard shortcuts** (Ctrl+Enter to execute)
+- **Professional code editing experience**
 
-### Ejecución en Tiempo Real
-- **WebSockets** para ejecución instantánea
-- **Salida en tiempo real** con streaming de resultados
-- **Manejo de errores** con stack traces detallados
-- **Cancelación de ejecución** para procesos largos
-- **Timeout configurable** para prevenir ejecuciones infinitas
+### Interactive Execution
+- **WebSockets** for real-time communication
+- **Interactive input()** support - fully functional user input
+- **Real-time output streaming** with live results
+- **Error handling** with detailed stack traces
+- **Execution timeout** to prevent infinite loops
+- **Process isolation** for secure code execution
 
-### Interfaz de Usuario
-- **Diseño responsivo** que se adapta a cualquier pantalla
-- **Panel dividido** (60% editor, 40% salida)
-- **Temas oscuro/claro** con detección automática del sistema
-- **Transiciones suaves** y animaciones elegantes
-- **Interfaz minimalista** enfocada en la productividad
+### User Interface
+- **Responsive design** that adapts to any screen size
+- **Split panel layout** (60% editor, 40% output)
+- **Dark/Light themes** with automatic system detection
+- **Smooth transitions** and elegant animations
+- **Minimalist interface** focused on productivity
 
-### Funcionalidades Avanzadas
-- **Guardar y compartir** código con URLs únicas
-- **Autoguardado** en localStorage
-- **Configuración personalizable** (fuente, tema, timeout)
-- **Historial de ejecuciones** con timestamps
-- **Exportación** de código y resultados
+### Advanced Features
+- **Save and share** code with unique URLs
+- **Auto-save** in localStorage
+- **Customizable settings** (font, theme, timeout)
+- **Interactive console** with input prompts
+- **Real-time collaboration** ready architecture
 
-## 🛠️ Tecnologías
+## 🛠️ Technologies
 
 ### Frontend
-- **Nuxt 3** - Framework Vue.js con SSR
-- **Vue 3** - Framework reactivo con Composition API
-- **TypeScript** - Tipado estático para mayor robustez
-- **Tailwind CSS** - Framework de utilidades CSS
-- **Monaco Editor** - Editor de código de VS Code
-- **VueUse** - Composables utilitarios para Vue
+- **Nuxt 3** - Vue.js framework with SSR
+- **Vue 3** - Reactive framework with Composition API
+- **TypeScript** - Static typing for enhanced robustness
+- **Tailwind CSS** - Utility-first CSS framework
+- **Monaco Editor** - VS Code's editor for the web
+- **Socket.io Client** - Real-time WebSocket communication
 
 ### Backend
-- **Nitro** - Motor de servidor universal
-- **Socket.io** - WebSockets para comunicación en tiempo real
-- **Node.js** - Runtime de JavaScript
-- **APIs RESTful** - Endpoints para guardar y compartir código
+- **Nitro** - Universal server engine
+- **Socket.io** - WebSockets for real-time communication
+- **Node.js** - JavaScript runtime
+- **Python** - Code execution engine
+- **RESTful APIs** - Endpoints for saving and sharing code
 
-### Herramientas de Desarrollo
-- **Bun** - Runtime y package manager ultrarrápido
-- **Vite** - Build tool con HMR instantáneo
-- **ESLint** - Linter para calidad de código
-- **Prettier** - Formateador de código
+### Development Tools
+- **Bun** - Ultra-fast runtime and package manager
+- **Vite** - Build tool with instant HMR
+- **Git** - Version control
+- **TypeScript** - Type-safe development
 
-## 📦 Instalación
+## 📦 Installation
 
-### Prerrequisitos
-- **Node.js** 18+ o **Bun** 1.0+
-- **Python** 3.8+ (para ejecución de código)
+### Prerequisites
+- **Bun** 1.0+ (recommended) or **Node.js** 18+
+- **Python** 3.8+ (for code execution)
 
-### Pasos de Instalación
+### Installation Steps
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
 ```bash
-git clone https://github.com/tu-usuario/live-python.git
+git clone https://github.com/zkjon/live-python.git
 cd live-python
 ```
 
-2. **Instalar dependencias**
+2. **Install dependencies**
 ```bash
 bun install
-# o
-npm install
 ```
 
-3. **Ejecutar en modo desarrollo**
+3. **Run in development mode**
 ```bash
 bun run dev
-# o
-npm run dev
 ```
 
-4. **Abrir en el navegador**
+4. **Open in browser**
 ```
 http://localhost:3000
 ```
 
-## 🚀 Uso
+## 🚀 Usage
 
-### Escribir Código
-1. Escribe tu código Python en el editor de la izquierda
-2. Usa **Ctrl+Enter** para ejecutar o haz clic en "Ejecutar"
-3. Ve los resultados en tiempo real en el panel de la derecha
+### Writing Code
+1. Write your Python code in the left editor panel
+2. Use **Ctrl+Enter** to execute or click the "Run" button
+3. See real-time results in the right output panel
 
-### Guardar y Compartir
-1. Haz clic en "Guardar" para generar un enlace único
-2. Comparte el enlace con otros usuarios
-3. El código se guarda automáticamente en localStorage
+### Interactive Input
+1. Use `input()` functions in your Python code
+2. When prompted, type your response in the interactive console
+3. Press Enter to submit your input and continue execution
 
-### Configuración
-1. Haz clic en el ícono de configuración
-2. Personaliza el tema, tamaño de fuente, timeout, etc.
-3. Los cambios se guardan automáticamente
+### Theme Switching
+1. Click the "Light Theme" or "Dark Theme" button
+2. The interface automatically adapts to your preference
+3. Theme preference is saved locally
 
-## 🎨 Temas y Personalización
+### Code Management
+1. Click "Clear" to reset the editor
+2. Code is automatically saved in your browser's local storage
+3. Your work persists between sessions
 
-### Temas Disponibles
-- **Claro** - Tema minimalista con fondo blanco
-- **Oscuro** - Tema elegante con fondo oscuro
-- **Auto** - Detecta automáticamente la preferencia del sistema
+## 🎨 Themes and Customization
 
-### Colores del Sistema
-- **Primario**: Azul (#3B82F6)
-- **Secundario**: Gris (#6B7280)
-- **Éxito**: Verde (#10B981)
-- **Error**: Rojo (#EF4444)
-- **Advertencia**: Amarillo (#F59E0B)
+### Available Themes
+- **Light** - Minimalist theme with white background
+- **Dark** - Elegant theme with dark background
+- **Auto** - Automatically detects system preference
 
-## 📱 Responsividad
+### Color System
+- **Primary**: Green (#10B981)
+- **Secondary**: Gray (#6B7280)
+- **Success**: Green (#10B981)
+- **Error**: Red (#EF4444)
+- **Warning**: Yellow (#F59E0B)
 
-La aplicación está optimizada para:
-- **Desktop** (1024px+) - Panel dividido horizontal
-- **Tablet** (768px-1023px) - Panel dividido vertical
-- **Mobile** (320px-767px) - Pestañas intercambiables
+## 📱 Responsive Design
 
-## 🔧 Configuración Avanzada
+The application is optimized for:
+- **Desktop** (1024px+) - Horizontal split panel
+- **Tablet** (768px-1023px) - Vertical split panel
+- **Mobile** (320px-767px) - Stacked layout
 
-### Variables de Entorno
+## 🔧 Advanced Configuration
+
+### Environment Variables
 ```env
-# Puerto del servidor
+# Server port
 PORT=3000
 
-# Timeout de ejecución (ms)
-EXECUTION_TIMEOUT=30000
+# Execution timeout (seconds)
+EXECUTION_TIMEOUT=30
 
-# Límite de memoria para Python (MB)
+# Python memory limit (MB)
 PYTHON_MEMORY_LIMIT=128
-
-# Directorio temporal para archivos
-TEMP_DIR=/tmp/live-python
 ```
 
-### Configuración de Python
-Por defecto, la aplicación usa el Python del sistema. Para usar un entorno virtual:
+### Python Configuration
+By default, the application uses the system Python. To use a virtual environment:
 
 ```bash
-# Crear entorno virtual
+# Create virtual environment
 python -m venv venv
 
-# Activar entorno virtual
+# Activate virtual environment
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 
-# Instalar dependencias Python
+# Install Python dependencies (optional)
 pip install numpy pandas matplotlib
 ```
 
-## 🧪 Testing
+## 🧪 Development
 
 ```bash
-# Ejecutar tests unitarios
-bun test
+# Start development server
+bun run dev
 
-# Ejecutar tests e2e
-bun test:e2e
+# Build for production
+bun run build
 
-# Cobertura de código
-bun test:coverage
+# Preview production build
+bun run preview
 ```
 
 ## 📈 Performance
 
-### Métricas de Rendimiento
-- **Tiempo de carga inicial**: < 2s
-- **Tiempo de ejecución**: < 100ms (código simple)
-- **Tamaño del bundle**: < 500KB (gzipped)
-- **Lighthouse Score**: 95+ en todas las categorías
+### Performance Metrics
+- **Initial load time**: < 2s
+- **Code execution**: < 100ms (simple code)
+- **Bundle size**: < 500KB (gzipped)
+- **Real-time communication**: WebSocket-based
 
-### Optimizaciones
-- **Code splitting** automático
-- **Lazy loading** de componentes
-- **Tree shaking** para eliminar código no usado
-- **Compresión gzip/brotli**
-- **Caching** inteligente de assets
+### Optimizations
+- **Automatic code splitting**
+- **Lazy loading** of components
+- **Tree shaking** to eliminate unused code
+- **Gzip/Brotli compression**
+- **Intelligent asset caching**
 
-## 🔒 Seguridad
+## 🔒 Security
 
-### Medidas de Seguridad
-- **Sandboxing** de ejecución Python
-- **Timeout** para prevenir bucles infinitos
-- **Límites de memoria** y CPU
-- **Sanitización** de entrada y salida
-- **Rate limiting** en APIs
-- **CORS** configurado correctamente
+### Security Measures
+- **Python execution sandboxing**
+- **Timeout** to prevent infinite loops
+- **Memory and CPU limits**
+- **Input/output sanitization**
+- **Process isolation**
+- **CORS** properly configured
 
-### Limitaciones
-- No se permiten imports de módulos del sistema
-- Acceso limitado al sistema de archivos
-- Ejecución en entorno aislado
+### Limitations
+- System module imports are restricted
+- Limited file system access
+- Execution in isolated environment
 
-## 🤝 Contribuir
+## 🤝 Contributing
 
-1. **Fork** el repositorio
-2. **Crea** una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. **Commit** tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. **Push** a la rama (`git push origin feature/nueva-funcionalidad`)
-5. **Abre** un Pull Request
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/new-feature`)
+3. **Commit** your changes (`git commit -am 'Add new feature'`)
+4. **Push** to the branch (`git push origin feature/new-feature`)
+5. **Open** a Pull Request
 
-### Guías de Contribución
-- Sigue las convenciones de código existentes
-- Añade tests para nuevas funcionalidades
-- Actualiza la documentación cuando sea necesario
-- Usa commits descriptivos y claros
+### Contribution Guidelines
+- Follow existing code conventions
+- Add tests for new features
+- Update documentation when necessary
+- Use descriptive and clear commits
+- Use **Bun** as the package manager
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 🙏 Agradecimientos
+## 🙏 Acknowledgments
 
-- **Monaco Editor** por el excelente editor de código
-- **Nuxt Team** por el increíble framework
-- **Tailwind CSS** por las utilidades de estilo
-- **Socket.io** por la comunicación en tiempo real
-- **Comunidad Open Source** por las herramientas y librerías
+- **Monaco Editor** for the excellent code editor
+- **Nuxt Team** for the incredible framework
+- **Tailwind CSS** for the utility-first styling
+- **Socket.io** for real-time communication
+- **Open Source Community** for the tools and libraries
 
-## 📞 Soporte
+## 📞 Support
 
-¿Tienes preguntas o problemas?
+Have questions or issues?
 
-- 📧 **Email**: soporte@live-python.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/tu-usuario/live-python/issues)
-- 💬 **Discusiones**: [GitHub Discussions](https://github.com/tu-usuario/live-python/discussions)
-- 📖 **Documentación**: [Wiki](https://github.com/tu-usuario/live-python/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/zkjon/live-python/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/zkjon/live-python/discussions)
+- 📖 **Documentation**: [Project Wiki](https://github.com/zkjon/live-python/wiki)
 
 ---
 
-**¡Disfruta programando en Python! 🐍✨**
+**Live Python coding! 🐍✨**
